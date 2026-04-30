@@ -13,11 +13,11 @@ build/
 .env.local
 .env.*.local
 
-# SQLite database — local dev only, not for version control
-prisma/dev.db
+# SQLite journal/WAL files — the main dev.db is committed for Vercel deployment
 prisma/dev.db-journal
-prisma/*.db
 prisma/*.db-journal
+prisma/*.db-wal
+prisma/*.db-shm
 
 # Prisma migration lock (optional — commit migrations/ but not the lock)
 # prisma/migrations/
