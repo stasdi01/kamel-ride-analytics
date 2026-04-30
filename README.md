@@ -6,7 +6,7 @@ This is a marketplace health dashboard for Kamel Ride, a community-powered inter
 
 ## 2. Live demo
 
-> Deploy to Vercel and add your URL here.
+kamel-ride-analytics.vercel.app
 
 ```
 vercel deploy --prod
@@ -39,18 +39,19 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## 5. Dashboard metrics explained
 
-| Metric | Formula | Why it matters |
-|---|---|---|
-| **Trips Posted Today** | `count(trip_posted)` since midnight | The leading indicator of supply health. A drop here before a peak travel day is an early warning sign. |
-| **Seat Fill Rate** | `seat_confirmed / seat_requested × 100` | The core marketplace conversion metric. Below ~60% means passengers can't find seats; above ~90% means supply is too thin and demand is being left unmet. |
-| **Payment Failure Rate** | `payment_failed / all payment events × 100` | Revenue leakage. High rates indicate payment method issues or fraud friction that's costing completed rides. |
-| **Peak Request Hour** | Hour with most `seat_requested` events | Demand concentration. Knowing when passengers are searching helps coordinate driver supply and push notification timing. |
+| Metric                   | Formula                                     | Why it matters                                                                                                                                            |
+| ------------------------ | ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Trips Posted Today**   | `count(trip_posted)` since midnight         | The leading indicator of supply health. A drop here before a peak travel day is an early warning sign.                                                    |
+| **Seat Fill Rate**       | `seat_confirmed / seat_requested × 100`     | The core marketplace conversion metric. Below ~60% means passengers can't find seats; above ~90% means supply is too thin and demand is being left unmet. |
+| **Payment Failure Rate** | `payment_failed / all payment events × 100` | Revenue leakage. High rates indicate payment method issues or fraud friction that's costing completed rides.                                              |
+| **Peak Request Hour**    | Hour with most `seat_requested` events      | Demand concentration. Knowing when passengers are searching helps coordinate driver supply and push notification timing.                                  |
 
 ## 6. Seed data narrative
 
 The seed script (`prisma/seed.ts`) generates one full week of realistic platform activity, Monday through Sunday, anchored to the week of April 20–26, 2026.
 
 **The story arc:**
+
 - **Mon–Tue:** Quiet early-week. A handful of drivers post trips, minimal seat requests. The platform is idle.
 - **Wed:** Activity builds. More `trip_posted` events. Students start planning weekend travel and requesting seats.
 - **Thu:** Peak supply day. Drivers post aggressively. `seat_confirmed` events pick up. First `payment_failed → payment_processed` retry sequences appear.
