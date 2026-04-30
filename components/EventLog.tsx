@@ -160,6 +160,8 @@ export default function EventLog({ events }: Props) {
               <path d="m20 20-3-3" />
             </svg>
             <input
+              id="event-filter"
+              name="event-filter"
               type="text"
               placeholder="Filter events, routes…"
               value={search}
