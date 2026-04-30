@@ -23,7 +23,9 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
-**Requirements:** Node 18+, no external database needed (SQLite is local).
+**Requirements:** Node 18+, no external database needed (SQLite is local). Copy `.env.example` to `.env` before running.
+
+> The seed data covers Apr 20–26, 2026. Hit **Simulate Events** on first load to add today's events and populate the "Trips Posted Today" stat card.
 
 ## 4. Architecture decisions
 

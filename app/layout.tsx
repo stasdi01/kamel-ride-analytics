@@ -1,17 +1,23 @@
 import type { Metadata } from "next";
-import { DM_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import { Fraunces, Instrument_Sans, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-const dmMono = DM_Mono({
+const fraunces = Fraunces({
   subsets: ["latin"],
-  weight: ["300", "400", "500"],
-  variable: "--font-dm-mono",
+  variable: "--font-fraunces",
+  axes: ["opsz"],
 });
 
-const plusJakarta = Plus_Jakarta_Sans({
+const instrumentSans = Instrument_Sans({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-plus-jakarta",
+  weight: ["400", "500", "600"],
+  variable: "--font-instrument-sans",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-jetbrains-mono",
 });
 
 export const metadata: Metadata = {
@@ -21,8 +27,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${dmMono.variable} ${plusJakarta.variable}`}>
-      <body className="font-sans antialiased" style={{ backgroundColor: "#0F0F0F" }}>
+    <html lang="en" className={`${fraunces.variable} ${instrumentSans.variable} ${jetbrainsMono.variable}`}>
+      <body className="font-sans antialiased" style={{ backgroundColor: "#FBF7F0" }}>
         {children}
       </body>
     </html>

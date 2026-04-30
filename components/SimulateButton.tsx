@@ -52,7 +52,11 @@ export default function SimulateButton({ onSimulated }: Props) {
     setLoading(true);
     setFailCount(0);
     try {
-      const picks = Array.from({ length: 20 }, () => pickRandom(EVENT_POOL));
+      const now = Date.now();
+      const picks = Array.from({ length: 20 }, (_, i) => ({
+        ...pickRandom(EVENT_POOL),
+        timestamp: new Date(now + i * 50).toISOString(),
+      }));
       const results = await Promise.allSettled(
         picks.map((ev) =>
           fetch("/api/events", {
@@ -62,6 +66,7 @@ export default function SimulateButton({ onSimulated }: Props) {
               name: ev.name,
               category: ev.category,
               route: ev.hasRoute ? pickRandom(ROUTES) : undefined,
+              timestamp: ev.timestamp,
             }),
           }).then((res) => {
             if (!res.ok) throw new Error(`${res.status}`);
@@ -82,27 +87,50 @@ export default function SimulateButton({ onSimulated }: Props) {
   return (
     <div className="flex items-center gap-3">
       {failCount > 0 && !loading && (
-        <span className="text-xs font-sans" style={{ color: "#F97316" }}>
+        <span className="font-sans text-xs" style={{ color: "#D2503B" }}>
           {failCount} event{failCount > 1 ? "s" : ""} failed to send
         </span>
       )}
       <button
+        type="button"
         onClick={handleSimulate}
         disabled={loading}
-        className="flex items-center gap-2 px-4 py-2 rounded-md text-sm font-sans font-medium transition-colors disabled:opacity-60"
+        className="inline-flex items-center gap-2 font-sans font-semibold rounded-lg transition-colors"
         style={{
-          backgroundColor: loading ? "#EA6D07" : "#F97316",
-          color: "#fff",
+          padding: "9px 16px",
+          fontSize: 13.5,
+          letterSpacing: "-0.005em",
+          backgroundColor: loading ? "#E8862A" : "#F39C3D",
+          color: "#1A1611",
+          border: 0,
           cursor: loading ? "not-allowed" : "pointer",
+          boxShadow: "0 1px 0 rgba(255,255,255,.25) inset, 0 1px 2px rgba(0,0,0,.4)",
+          opacity: loading ? 0.8 : 1,
         }}
       >
         {loading ? (
           <>
-            <span className="inline-block w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+            <span
+              className="inline-block w-3.5 h-3.5 border-2 border-t-transparent rounded-full animate-spin"
+              style={{ borderColor: "#1A1611", borderTopColor: "transparent" }}
+            />
             Simulating…
           </>
         ) : (
-          "Simulate Events"
+          <>
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              style={{ width: 14, height: 14 }}
+            >
+              <path d="M13 2 L4 14 h7 l-1 8 9-12 h-7 z" />
+            </svg>
+            Simulate Events
+          </>
         )}
       </button>
     </div>

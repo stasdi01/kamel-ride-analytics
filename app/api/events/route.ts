@@ -20,6 +20,7 @@ export async function POST(req: NextRequest) {
         category: parsed.data.category,
         route: parsed.data.route ?? null,
         metadata: parsed.data.metadata ? JSON.stringify(parsed.data.metadata) : null,
+        ...(parsed.data.timestamp && { timestamp: new Date(parsed.data.timestamp) }),
       },
     });
 
