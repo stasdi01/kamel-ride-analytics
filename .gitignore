@@ -1,0 +1,40 @@
+# dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# production build
+build/
+
+# env files — never commit secrets
+.env
+.env.local
+.env.*.local
+
+# SQLite database — local dev only, not for version control
+prisma/dev.db
+prisma/dev.db-journal
+prisma/*.db
+prisma/*.db-journal
+
+# Prisma migration lock (optional — commit migrations/ but not the lock)
+# prisma/migrations/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
